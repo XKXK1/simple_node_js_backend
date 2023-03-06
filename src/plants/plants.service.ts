@@ -86,3 +86,8 @@ export const update = async (
 
     return plant
   }
+
+  export const getAllPlantsByWaterType = async (waterType: WaterType): Promise<Plant[]> => {
+      return Object.values(plants).filter(plant => plant.waterType === waterType)
+  }
+  

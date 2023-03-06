@@ -5,6 +5,7 @@
 import express, { Request, Response } from "express";
 import * as PlantService from "./plants.service";
 import { Plant } from "./plant.interface";
+import { WaterType } from "./waterType.enum";
 
 /**
  * Router Definition
@@ -34,7 +35,7 @@ plantsRouter.get("/", async (req: Request, res: Response) => {
   
   // GET plants/:id
   
-  plantsRouter.get("/:id", async (req: Request, res: Response) => {
+  plantsRouter.get("/byId/:id", async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
   
     try {
@@ -67,6 +68,28 @@ plantsRouter.get("/", async (req: Request, res: Response) => {
 
       res.status(500).send(e.message);
         }
+    }
+  });
+
+  //get all plants by waterType
+
+  plantsRouter.get("/type", async (req: Request, res: Response) => {
+    console.log("called get by waterType")
+
+    try {
+
+      const waterType = req.query.waterType as WaterType
+
+        console.log(waterType)
+
+      const plants = await PlantService.getAllPlantsByWaterType(waterType)
+  
+      res.status(200).json(plants);
+    } catch(e) {
+      if(e instanceof Error){
+
+        res.status(500).send(e.message);
+          }
     }
   });
   
