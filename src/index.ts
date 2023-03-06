@@ -15,12 +15,12 @@ dotenv.config();
  */
 
 if (!process.env.PORT) {
-    process.exit(1);
- }
- 
- const PORT: number = parseInt(process.env.PORT as string, 10);
- 
- const app = express();
+  process.exit(1);
+}
+
+const PORT: number = parseInt(process.env.PORT as string, 10);
+
+const app = express();
 
 /**
  *  App Configuration
@@ -36,5 +36,5 @@ app.use("/api/plants", plantsRouter);
  */
 
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-  });
+  console.log(`Listening on port ${PORT}`);
+});
